@@ -7,6 +7,7 @@ import Header from './Component/Header/Header'
 import SelectLanguage from './Component/SelectLanguage/SelectLanguage'
 import moment from 'moment'
 import Toolbar from './Component/Toolbar/Toolbar';
+import {useTranslation} from "react-i18next";
 
 function App() {
     const [tableData, setTableData] = useState(TableData)
@@ -14,6 +15,7 @@ function App() {
     const [modalData, setModalData] = useState({})
     const [selectedTab, setSelectedTab] = useState('present')
     const [groupedData, setGroupedData] = useState({})
+    const [t, i18n] = useTranslation('common');
 
     useEffect(() => {
         const past = []
@@ -33,7 +35,8 @@ function App() {
         console.log('future', future)
         setGroupedData({ past, present, future })
     }, [tableData])
-
+    
+    //Handler for chnaging date
     const dateHandler = (e, clickedEventId) => {
         const clickedEventIndex = tableData.findIndex(
             (event) => event.id === clickedEventId
@@ -46,6 +49,7 @@ function App() {
         console.log(e.target.value, clickedEventId)
     }
 
+    //Handler for openning price modal
     const FaDollerHandler = (selectedEvent) => {
         const events = TableData
         const index = events.findIndex((event) => event.name === selectedEvent)
@@ -63,7 +67,7 @@ function App() {
                 <main style={{marginTop: '64px'}}>
                 <SelectLanguage />
                 <Header text="Manage Campaign" />
-                {['past', 'present', 'future'].map((tab) => (
+                {['past', 'live', 'future'].map((tab) => (
                     <button key={tab}
                         style={selectedTab === tab ? { background: '#4e4e89' } : {}}
                         className="btn"
@@ -72,7 +76,7 @@ function App() {
                         }}
                         
                     >
-                        {tab}
+                    {tab}
                     </button>
                 ))}
                 <hr />

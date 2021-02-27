@@ -37,9 +37,10 @@
 .heading{
     display: block;
     margin-left: 1rem;
+    font-size: 1.2rem;
 }
 .sub{
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 .btn-cancel{
     padding: .5rem;
